@@ -728,5 +728,167 @@ if __name__ == "__main__":
         output: `error: invalid syntax (<string>, line 8)`,
         input: `7`
     },
+    "Program: Traveling Salesman Problem in prolog": {
+        code: `
+distance(delhi, mumbai, 1400).
+distance(delhi, kolkata, 1500).
+distance(delhi, chennai, 2200).
+distance(mumbai, kolkata, 2000).
+distance(mumbai, chennai, 1300).
+distance(kolkata, chennai, 1650).
+
+path(X, Y, D) :- distance(X, Y, D).
+path(X, Y, D) :- distance(Y, X, D).
+
+total_distance([_], 0).
+total_distance([A,B|Rest], Total) :-
+    path(A, B, D1),
+    total_distance([B|Rest], D2),
+    Total is D1 + D2.
+
+cities([delhi, mumbai, kolkata, chennai]).
+
+tsp(Start, BestFullPath, MinDistance) :-
+    cities(Cities),
+    member(Start, Cities),
+    select(Start, Cities, Others),
+    findall(Dist-FullPath,
+            ( permutation(Others, Perm),
+              append([Start|Perm], [Start], FullPath),
+              total_distance(FullPath, Dist)
+            ),
+            Pairs),
+    keysort(Pairs, Sorted),
+    Sorted = [MinDistance-BestFullPath | _].
+
+
+tsp(delhi, BestPath, MinDistance).
+tsp(mumbai, BestPath, MinDistance).
+`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  fuzzy logic": {
+        code: `
+
+A = 0.7
+B = 0.5
+
+AND = min(A, B)
+OR = max(A, B)
+NOT_A = 1 - A
+
+print("AND:", AND)
+print("OR:", OR)
+print("NOT A:", NOT_A)
+
+`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  Simple expert system": {
+        code: `
+
+print("Expert System for Disease Diagnosis")
+fever = input("Do you have fever? (yes/no): ")
+cough = input("Do you have cough? (yes/no): ")
+if fever == 'yes' and cough == 'yes':
+print("Possible Flu")
+else:
+print("Consult Doctor")
+`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  Artificial Neural Network Demonstration": {
+        code: `
+
+from sklearn.neural_network import MLPClassifier
+X = [[0,0],[0,1],[1,0],[1,1]]
+y = [0,1,1,0]
+clf = MLPClassifier(hidden_layer_sizes=(2,), max_iter=1000)
+clf.fit(X, y)
+print(clf.predict([[0,1]]))
+
+
+python -m pip install scikit-learn
+`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  prolog backtracking": {
+        code: `
+
+
+likes(ram, mango).
+likes(ram, apple).
+likes(ram, banana).
+
+
+
+likes(ram,X).
+`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  Elementary Arithmetic Operations in Prolog": {
+        code: `
+
+
+add(X, Y, Z) :- Z is X + Y.
+subtract(X, Y, Z) :- Z is X - Y.
+multiply(X, Y, Z) :- Z is X * Y.
+divide(X, Y, Z) :- Z is X / Y.
+
+
+divide(5,3,Z).`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  Semantic Net using Prolog Predicates": {
+        code: `
+
+
+isa(cat, animal).
+isa(animal, living_thing).
+property(animal, breathes).
+has_property(X, Y) :- isa(X, Z), property(Z, Y).
+
+
+has_property(cat, breathes).`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  Knowledge Base and Query System in Prolog": {
+        code: `
+
+
+animal(cat).
+animal(dog).
+animal(cow).
+pet(cat).
+pet(dog).
+is_pet(X) :- animal(X), pet(X).
+
+is_pet(cow).`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
+    "Program:  prolog predicates": {
+        code: `
+
+
+male(ram).
+male(shyam).
+female(sita).
+parent(ram, shyam).
+parent(sita, shyam).
+father(X, Y) :- male(X), parent(X, Y).
+
+
+father(ram, shyam).`,
+        output: `error: invalid syntax (<string>, line 8)`,
+        input: `7`
+    },
 
 }
